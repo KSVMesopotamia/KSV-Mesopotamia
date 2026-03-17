@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KSV Mesopotamia Grevenbroich</title>
+
+<style>
+body {
+    margin:0;
+    font-family:Arial;
+    background:#edf2f7;
+    color:#172033;
+}
+
+/* LOADER */
+.page-loader {
+position:fixed; inset:0;
+background:linear-gradient(135deg,#111827,#0f5f22,#b71c1c);
+display:flex; align-items:center; justify-content:center;
+z-index:9999;
+transition:0.8s;
+}
+.page-loader.hidden { opacity:0; visibility:hidden; }
+
+/* HERO HEADER */
+.hero-header {
+height:360px;
+background:url("mannschaftsfoto.jpeg") center/cover no-repeat;
+animation:zoom 8s infinite alternate;
+position:relative;
+}
+
+.hero-overlay {
+position:absolute; inset:0;
+background:rgba(0,0,0,0.5);
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+}
+
+.logo {
+width:90px;
+background:white;
+border-radius:50%;
+padding:6px;
+margin-bottom:10px;
+}
+
+.hero-header h1 {
+margin:0;
+font-size:40px;
+}
+
+.hero-header p {
+font-weight:bold;
+}
+
+/* NAV */
+nav {
+background:#111827;
+text-align:center;
+padding:12px;
+}
+
+nav a {
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* SECTIONS */
+section {
+max-width:1100px;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:12px;
+}
+
+/* TRAINER */
+.team {
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.spieler {
+width:220px;
+background:#0f172a;
+color:white;
+border-radius:10px;
+overflow:hidden;
+text-align:center;
+}
+
+.spieler img {
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.spieler-info {
+padding:10px;
+}
+
+/* WIDGET */
+.widget-box {
+background:#f8fafc;
+padding:20px;
+border-radius:10px;
+}
+
+/* BUTTONS */
+.button {
+display:block;
+padding:10px;
+margin:10px 0;
+color:white;
+text-decoration:none;
+text-align:center;
+border-radius:8px;
+}
+
+.button-map { background:#0f5f22; }
+.button-insta { background:#b71c1c; }
+
+/* FOOTER */
+footer {
+background:#111827;
+color:white;
+text-align:center;
+padding:15px;
+}
+
+/* ANIMATION */
+@keyframes zoom {
+from { background-size:100%; }
+to { background-size:110%; }
+}
+
+/* MOBILE */
+@media (max-width:768px){
+.hero-header { height:240px; animation:none; }
+
+.hero-header h1 { font-size:26px; }
+
+.logo { width:60px; }
+
+.spieler {
+width:100%;
+max-width:300px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div class="page-loader" id="loader">
+<h2 style="color:white;">Ein Team. Ein Verein. Eine Leidenschaft.</h2>
+</div>
+
+<!-- HEADER -->
+<header class="hero-header">
+<div class="hero-overlay">
+<div>
+<img src="logo.png" class="logo">
+<h1>KSV Mesopotamia Grevenbroich</h1>
+<p>Ein Team. Ein Verein. Eine Leidenschaft.</p>
+</div>
+</div>
+</header>
+
+<!-- NAV -->
+<nav>
+<a href="#spielplan">Spielplan</a>
+<a href="#trainer">Trainer</a>
+<a href="#kontakt">Kontakt</a>
+</nav>
+
+<!-- SPIELPLAN -->
+<section id="spielplan">
+<h2>Spielplan</h2>
+
+<div class="widget-box">
+<div id="fp-widget_root-3B5NwsAFG6saCNyjjmhUOaCHmC2">
+<a href="https://www.fupa.net/club/ksv-mesopotamia-grevenbroich" target="_blank">
+KSV Mesopotamia Grevenbroich auf FuPa
+</a>
+</div>
+</div>
+
+</section>
+
+<!-- TRAINER -->
+<section id="trainer">
+<h2>Trainerteam</h2>
+
+<div class="team">
+
+<div class="spieler">
+<img src="baykal.jpeg">
+<div class="spieler-info">Baykal Günes<br>Trainer</div>
+</div>
+
+<div class="spieler">
+<img src="goekhan.jpeg">
+<div class="spieler-info">Gökhan Bayrak<br>Co-Trainer</div>
+</div>
+
+</div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+<h2>Kontakt</h2>
+
+<p><strong>E-Mail:</strong> mesopotamiagv@gmail.de</p>
+<p><strong>Instagram:</strong> @ksvmesopotamia</p>
+
+<a class="button button-map" href="https://www.google.com/maps/search/?api=1&query=Grevenbroich" target="_blank">Google Maps</a>
+<a class="button button-insta" href="https://www.instagram.com/ksvmesopotamia?igsh=MXJiNmxkODg0dzZsYQ==" target="_blank">Instagram</a>
+
+</section>
+
+<footer>
+© 2026 KSV Mesopotamia Grevenbroich
+</footer>
+
+<script src="https://widget-api.fupa.net/vendor/widget.js?v1"></script>
+
+<script>
+window.onload = function() {
+setTimeout(function(){
+document.getElementById("loader").classList.add("hidden");
+}, 1500);
+}
+</script>
+
+</body>
+</html>
