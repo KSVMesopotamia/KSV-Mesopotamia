@@ -1,0 +1,758 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSV Mesopotamia Grevenbroich</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #edf2f7;
+            color: #172033;
+        }
+
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #111827 0%, #0f5f22 45%, #b71c1c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            flex-direction: column;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: white;
+            padding: 8px;
+            object-fit: contain;
+            animation: pulseLogo 1.8s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255,255,255,0.25);
+        }
+
+        .loader-title {
+            margin-top: 22px;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .loader-subtitle {
+            margin-top: 8px;
+            color: #f3f4f6;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .loader-bar-wrap {
+            width: 260px;
+            height: 8px;
+            background: rgba(255,255,255,0.18);
+            border-radius: 999px;
+            margin-top: 24px;
+            overflow: hidden;
+        }
+
+        .loader-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #f2c400, #ffffff, #f2c400);
+            border-radius: 999px;
+            animation: loadingBar 2.2s ease forwards;
+        }
+
+        .site-content {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: contentFadeIn 1s ease forwards;
+            animation-delay: 0.55s;
+        }
+
+        @keyframes pulseLogo {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(255,255,255,0.18); }
+            50% { transform: scale(1.06); box-shadow: 0 0 38px rgba(255,255,255,0.32); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,255,255,0.18); }
+        }
+
+        @keyframes loadingBar {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        @keyframes contentFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            background: linear-gradient(90deg, #b71c1c 0%, #f2c400 50%, #0f5f22 100%);
+            color: white;
+            padding: 20px;
+        }
+
+        .header-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            background: white;
+            border-radius: 50%;
+            padding: 6px;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 38px;
+        }
+
+        .header-text p {
+            margin: 6px 0 0 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        nav {
+            background: #111827;
+            text-align: center;
+            padding: 14px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #f2c400;
+        }
+
+        .hero {
+            max-width: 1300px;
+            margin: 28px auto;
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-content {
+            padding: 28px;
+        }
+
+        .hero-content h2 {
+            margin: 0 0 10px 0;
+            font-size: 32px;
+        }
+
+        .hero-content p {
+            margin: 0;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        section {
+            max-width: 1300px;
+            margin: 28px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        h3 {
+            margin-top: 35px;
+            margin-bottom: 16px;
+            font-size: 20px;
+            border-left: 6px solid #0f5f22;
+            padding-left: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 12px;
+            border-top: 5px solid #b71c1c;
+        }
+
+        .match-box {
+            background: linear-gradient(90deg, #b71c1c, #f2c400, #0f5f22);
+            color: white;
+            padding: 22px;
+            border-radius: 14px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .teamfoto {
+            width: 100%;
+            max-width: 950px;
+            display: block;
+            margin: 26px auto 0 auto;
+            border-radius: 16px;
+        }
+
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        .spieler {
+            width: 220px;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #0f172a;
+            position: relative;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .spieler:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 18px 35px rgba(0,0,0,0.28);
+        }
+
+        .spieler img {
+            width: 100%;
+            height: 290px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .spieler:hover img {
+            transform: scale(1.08);
+            filter: brightness(1.05);
+        }
+
+        .spieler-nummer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #f2c400;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            z-index: 2;
+        }
+
+        .spieler-info {
+            padding: 16px 14px 18px 14px;
+            background: linear-gradient(to bottom, #0f5f22, #0f172a);
+            color: white;
+            text-align: center;
+            transition: background 0.35s ease;
+        }
+
+        .spieler:hover .spieler-info {
+            background: linear-gradient(to bottom, #157a2d, #0b1220);
+        }
+
+        .spieler-info h4 {
+            margin: 0 0 6px 0;
+            font-size: 18px;
+            line-height: 1.25;
+        }
+
+        .spieler-info p {
+            margin: 0;
+            color: #dbeafe;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .kontakt-grid,
+        .widget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .kontakt-box,
+        .widget-box {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 6px solid #b71c1c;
+        }
+
+        .widget-box {
+            border-left: none;
+            border-top: 5px solid #0f5f22;
+        }
+
+        .widget-placeholder {
+            min-height: 320px;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #475569;
+            background: white;
+            padding: 20px;
+        }
+
+        .button-row {
+            margin-top: 18px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            opacity: 0.92;
+        }
+
+        .button-map {
+            background: #0f5f22;
+        }
+
+        .button-insta {
+            background: #b71c1c;
+        }
+
+        footer {
+            margin-top: 30px;
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-text h1 {
+                font-size: 30px;
+            }
+
+            .hero-image {
+                height: 260px;
+            }
+
+            section {
+                margin: 18px 12px;
+                padding: 22px;
+            }
+
+            .team {
+                justify-content: center;
+            }
+
+            .spieler {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 6px 8px;
+            }
+
+            .loader-title {
+                font-size: 22px;
+                padding: 0 20px;
+            }
+
+            .loader-bar-wrap {
+                width: 210px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-loader" id="pageLoader">
+        <img src="logo.png" alt="KSV Mesopotamia Logo" class="loader-logo">
+        <div class="loader-title">Ein Team. Ein Verein. Eine Leidenschaft.</div>
+        <div class="loader-subtitle">KSV Mesopotamia Grevenbroich</div>
+        <div class="loader-bar-wrap">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <div class="site-content">
+        <header>
+            <div class="header-inner">
+                <img src="logo.png" alt="KSV Mesopotamia Logo" class="logo">
+                <div class="header-text">
+                    <h1>KSV Mesopotamia Grevenbroich</h1>
+                    <p>Rot • Gelb • Grün</p>
+                </div>
+            </div>
+        </header>
+
+        <nav>
+            <a href="#verein">Verein</a>
+            <a href="#spiel">Nächstes Spiel</a>
+            <a href="#spielplan">Spielplan & Tabelle</a>
+            <a href="#team">Mannschaft</a>
+            <a href="#trainer">Trainerteam</a>
+            <a href="#kontakt">Kontakt</a>
+        </nav>
+
+        <div class="hero">
+            <img src="sportanlage.png" alt="Sportanlage KSV Mesopotamia" class="hero-image">
+            <div class="hero-content">
+                <h2>Ein Team. Ein Verein. Eine Leidenschaft.</h2>
+                <p>KSV Mesopotamia Grevenbroich – Fußball mit Herz, Stolz und Identität.</p>
+            </div>
+        </div>
+
+        <section id="verein">
+            <h2>Über unseren Verein</h2>
+            <div class="info-grid">
+                <div class="info-box"><strong>Verein</strong><br>KSV Mesopotamia</div>
+                <div class="info-box"><strong>Gründung</strong><br>2019</div>
+                <div class="info-box"><strong>Standort</strong><br>Grevenbroich</div>
+                <div class="info-box"><strong>Vereinsfarben</strong><br>Rot, Gelb, Grün</div>
+                <div class="info-box"><strong>Trainer</strong><br>Baykal Günes</div>
+                <div class="info-box"><strong>Co-Trainer</strong><br>Gökhan Bayrak</div>
+                <div class="info-box"><strong>Trainingszeiten</strong><br>Mittwoch und Freitag<br>19:30 – 21:00 Uhr</div>
+                <div class="info-box"><strong>Trainings- und Heimstätte</strong><br>Hauptstraße 130<br>41517 Grevenbroich</div>
+            </div>
+
+            <img src="mannschaftsfoto.jpeg" alt="Mannschaftsfoto KSV Mesopotamia" class="teamfoto">
+        </section>
+
+        <section id="spiel">
+            <h2>Nächstes Spiel</h2>
+            <div class="match-box">
+                KSV Mesopotamia Grevenbroich – SG Rommerskirchen/Gilbach<br>
+                Sonntag, 15.03.2026 • 15:00 Uhr
+            </div>
+        </section>
+
+        <section id="spielplan">
+            <h2>Spielplan & Tabelle</h2>
+
+            <div class="widget-grid">
+                <div class="widget-box">
+                    <h3>Aktueller Spielplan</h3>
+
+                    <!-- HIER DEN WIDGET-CODE VON FUPA ODER FUSSBALL.DE EINFÜGEN -->
+                    <div class="widget-placeholder">
+                        <div>
+                            <strong>Spielplan-Widget</strong><br><br>
+                            Füge hier den Einbettungscode für den automatischen Spielplan ein.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget-box">
+                    <h3>Aktuelle Tabelle / Liga</h3>
+
+                    <!-- HIER DEN WIDGET-CODE VON FUPA ODER FUSSBALL.DE EINFÜGEN -->
+                    <div class="widget-placeholder">
+                        <div>
+                            <strong>Tabellen-Widget</strong><br><br>
+                            Füge hier den Einbettungscode für die aktuelle Liga-Tabelle ein.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <a class="button button-map" href="https://www.fussball.de/mannschaft/ksv-mesopotamia-grevenbroich-ksv-mesopotamia-grevenbroich-niederrhein/-/saison/2526/team-id/027R8UF3ES000000VS5489B2VU8ANKH6" target="_blank" rel="noopener noreferrer">Spielplan auf FUSSBALL.DE</a>
+                <a class="button button-insta" href="https://www.fussball.de/spieltag/kreisliga-b-gr-1-kreis-grevenbroich-neuss-kreisliga-b-herren-saison2526-niederrhein/-/staffel/02TOSR4048000009VS5489BUVSPHI8RP-G" target="_blank" rel="noopener noreferrer">Tabelle auf FUSSBALL.DE</a>
+            </div>
+        </section>
+
+        <section id="team">
+            <h2>Unsere Mannschaft</h2>
+
+            <h3>Torwart</h3>
+            <div class="team">
+                <div class="spieler">
+                    <div class="spieler-nummer">1</div>
+                    <img src="alex.jpeg" alt="Alexander Paulsen">
+                    <div class="spieler-info">
+                        <h4>Alexander Paulsen</h4>
+                        <p>Torwart</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">12</div>
+                    <img src="serhat.jpeg" alt="Serhat Demir">
+                    <div class="spieler-info">
+                        <h4>Serhat Demir</h4>
+                        <p>Torwart</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Abwehr</h3>
+            <div class="team">
+                <div class="spieler">
+                    <div class="spieler-nummer">2</div>
+                    <img src="onur.jpeg" alt="Onur Arslan">
+                    <div class="spieler-info">
+                        <h4>Onur Arslan</h4>
+                        <p>Abwehr</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">3</div>
+                    <img src="mirza.jpeg" alt="Mirza Hasan Atasayar">
+                    <div class="spieler-info">
+                        <h4>Mirza Hasan Atasayar</h4>
+                        <p>Abwehr</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">4</div>
+                    <img src="sadik.jpeg" alt="Sadik Ibraim">
+                    <div class="spieler-info">
+                        <h4>Sadik Ibraim</h4>
+                        <p>Abwehr</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">5</div>
+                    <img src="hassan.jpeg" alt="Hasan Jbara">
+                    <div class="spieler-info">
+                        <h4>Hasan Jbara</h4>
+                        <p>Abwehr</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">13</div>
+                    <img src="leon.jpeg" alt="Leon">
+                    <div class="spieler-info">
+                        <h4>Leon</h4>
+                        <p>Abwehr</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Mittelfeld</h3>
+            <div class="team">
+                <div class="spieler">
+                    <div class="spieler-nummer">6</div>
+                    <img src="roman.jpeg" alt="Roman Abasian">
+                    <div class="spieler-info">
+                        <h4>Roman Abasian</h4>
+                        <p>Mittelfeld</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">7</div>
+                    <img src="nika.jpeg" alt="Nika Akhmedov">
+                    <div class="spieler-info">
+                        <h4>Nika Akhmedov</h4>
+                        <p>Mittelfeld</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">8</div>
+                    <img src="luis.jpeg" alt="Luis">
+                    <div class="spieler-info">
+                        <h4>Luis</h4>
+                        <p>Mittelfeld</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">10</div>
+                    <img src="amin.jpeg" alt="Amin Chabibi">
+                    <div class="spieler-info">
+                        <h4>Amin Chabibi</h4>
+                        <p>Mittelfeld</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">18</div>
+                    <img src="siyabend.jpeg" alt="Siyabend Cigerli">
+                    <div class="spieler-info">
+                        <h4>Siyabend Cigerli</h4>
+                        <p>Mittelfeld</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Angriff</h3>
+            <div class="team">
+                <div class="spieler">
+                    <div class="spieler-nummer">9</div>
+                    <img src="ayman.jpeg" alt="Ayman Amune">
+                    <div class="spieler-info">
+                        <h4>Ayman Amune</h4>
+                        <p>Angriff</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">11</div>
+                    <img src="rasa.jpeg" alt="Rasa Cigerli">
+                    <div class="spieler-info">
+                        <h4>Rasa Cigerli</h4>
+                        <p>Angriff</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">17</div>
+                    <img src="tom.jpeg" alt="Tom">
+                    <div class="spieler-info">
+                        <h4>Tom</h4>
+                        <p>Angriff</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">23</div>
+                    <img src="jamiro.jpeg" alt="Jamiro">
+                    <div class="spieler-info">
+                        <h4>Jamiro</h4>
+                        <p>Angriff</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="trainer">
+            <h2>Trainerteam</h2>
+            <div class="team">
+                <div class="spieler">
+                    <div class="spieler-nummer">T</div>
+                    <img src="baykal.jpeg" alt="Baykal Günes">
+                    <div class="spieler-info">
+                        <h4>Baykal Günes</h4>
+                        <p>Trainer</p>
+                    </div>
+                </div>
+
+                <div class="spieler">
+                    <div class="spieler-nummer">C</div>
+                    <img src="goekhan.jpeg" alt="Gökhan Bayrak">
+                    <div class="spieler-info">
+                        <h4>Gökhan Bayrak</h4>
+                        <p>Co-Trainer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kontakt">
+            <h2>Kontakt</h2>
+            <div class="kontakt-grid">
+                <div class="kontakt-box">
+                    <strong>E-Mail</strong><br>
+                    mesopotamiagv@gmail.de
+                </div>
+
+                <div class="kontakt-box">
+                    <strong>Instagram</strong><br>
+                    @ksvmesopotamia
+                </div>
+
+                <div class="kontakt-box">
+                    <strong>Adresse</strong><br>
+                    Hauptstraße 130<br>
+                    41517 Grevenbroich
+                </div>
+            </div>
+
+            <div class="button-row">
+                <a class="button button-map" href="https://www.google.com/maps/search/?api=1&query=Hauptstraße+130+41517+Grevenbroich" target="_blank" rel="noopener noreferrer">Zu Google Maps</a>
+                <a class="button button-insta" href="https://www.instagram.com/ksvmesopotamia?igsh=MXJiNmxkODg0dzZsYQ==" target="_blank" rel="noopener noreferrer">Zum Instagram-Profil</a>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 KSV Mesopotamia Grevenbroich
+        </footer>
+    </div>
+
+    <script>
+        window.addEventListener("load", function () {
+            var loader = document.getElementById("pageLoader");
+            setTimeout(function () {
+                loader.classList.add("hidden");
+            }, 2200);
+        });
+    </script>
+
+</body>
+</html>
