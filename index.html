@@ -6,240 +6,366 @@
 <title>KSV Mesopotamia Grevenbroich</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
-    margin:0;
-    font-family:Arial;
-    background:#edf2f7;
-    color:#172033;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #edf2f7;
+    color: #172033;
 }
 
 /* LOADER */
 .page-loader {
-position:fixed; inset:0;
-background:linear-gradient(135deg,#111827,#0f5f22,#b71c1c);
-display:flex; align-items:center; justify-content:center;
-z-index:9999;
-transition:0.8s;
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #111827, #0f5f22, #b71c1c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: 0.8s;
 }
-.page-loader.hidden { opacity:0; visibility:hidden; }
+
+.page-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
 
 /* HERO HEADER */
 .hero-header {
-height:360px;
-background:url("mannschaftsfoto.jpeg") center/cover no-repeat;
-animation:zoom 8s infinite alternate;
-position:relative;
+    height: 360px;
+    background: url("mannschaftsfoto.jpeg") center/cover no-repeat;
+    animation: zoom 8s infinite alternate;
+    position: relative;
 }
 
 .hero-overlay {
-position:absolute; inset:0;
-background:rgba(0,0,0,0.5);
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-color:white;
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.hero-content {
+    max-width: 900px;
 }
 
 .logo {
-width:90px;
-background:white;
-border-radius:50%;
-padding:6px;
-margin-bottom:10px;
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    background: white;
+    border-radius: 50%;
+    padding: 6px;
+    margin-bottom: 10px;
 }
 
 .hero-header h1 {
-margin:0;
-font-size:40px;
+    margin: 0;
+    font-size: 40px;
+    line-height: 1.15;
 }
 
 .hero-header p {
-font-weight:bold;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
 }
 
 /* NAV */
 nav {
-background:#111827;
-text-align:center;
-padding:12px;
+    background: #111827;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-nav a {
-color:white;
-margin:0 15px;
-text-decoration:none;
-font-weight:bold;
+.nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 54px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #f2c400;
+}
+
+.menu-toggle {
+    display: none;
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
 }
 
 /* SECTIONS */
 section {
-max-width:1100px;
-margin:20px auto;
-background:white;
-padding:20px;
-border-radius:12px;
+    max-width: 1100px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+h2 {
+    margin-top: 0;
 }
 
 /* TRAINER */
 .team {
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-justify-content:center;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .spieler {
-width:220px;
-background:#0f172a;
-color:white;
-border-radius:10px;
-overflow:hidden;
-text-align:center;
+    width: 220px;
+    background: #0f172a;
+    color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
 }
 
 .spieler img {
-width:100%;
-height:250px;
-object-fit:cover;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
 }
 
 .spieler-info {
-padding:10px;
+    padding: 10px;
 }
 
 /* WIDGET */
 .widget-box {
-background:#f8fafc;
-padding:20px;
-border-radius:10px;
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 /* BUTTONS */
 .button {
-display:block;
-padding:10px;
-margin:10px 0;
-color:white;
-text-decoration:none;
-text-align:center;
-border-radius:8px;
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 8px;
 }
 
-.button-map { background:#0f5f22; }
-.button-insta { background:#b71c1c; }
+.button-map {
+    background: #0f5f22;
+}
+
+.button-insta {
+    background: #b71c1c;
+}
 
 /* FOOTER */
 footer {
-background:#111827;
-color:white;
-text-align:center;
-padding:15px;
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 15px;
 }
 
 /* ANIMATION */
 @keyframes zoom {
-from { background-size:100%; }
-to { background-size:110%; }
+    from { background-size: 100%; }
+    to { background-size: 110%; }
 }
 
 /* MOBILE */
-@media (max-width:768px){
-.hero-header { height:240px; animation:none; }
+@media (max-width: 768px) {
+    .hero-header {
+        height: 240px;
+        animation: none;
+        background-position: center;
+    }
 
-.hero-header h1 { font-size:26px; }
+    .hero-overlay {
+        padding: 16px;
+    }
 
-.logo { width:60px; }
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
 
-.spieler {
-width:100%;
-max-width:300px;
-}
+    .hero-header h1 {
+        font-size: 26px;
+    }
+
+    .hero-header p {
+        font-size: 14px;
+        margin-top: 6px;
+    }
+
+    .nav-inner {
+        display: block;
+        min-height: auto;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 54px 16px 12px 16px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    section {
+        margin: 12px;
+        padding: 16px;
+    }
+
+    .spieler {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .spieler img {
+        height: 220px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
 <div class="page-loader" id="loader">
-<h2 style="color:white;">Ein Team. Ein Verein. Eine Leidenschaft.</h2>
+    <h2 style="color:white;">Ein Team. Ein Verein. Eine Leidenschaft.</h2>
 </div>
 
-<!-- HEADER -->
 <header class="hero-header">
-<div class="hero-overlay">
-<div>
-<img src="logo.png" class="logo">
-<h1>KSV Mesopotamia Grevenbroich</h1>
-<p>Ein Team. Ein Verein. Eine Leidenschaft.</p>
-</div>
-</div>
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <img src="logo.png" class="logo" alt="Vereinslogo">
+            <h1>KSV Mesopotamia Grevenbroich</h1>
+            <p>Ein Team. Ein Verein. Eine Leidenschaft.</p>
+        </div>
+    </div>
 </header>
 
-<!-- NAV -->
 <nav>
-<a href="#spielplan">Spielplan</a>
-<a href="#trainer">Trainer</a>
-<a href="#kontakt">Kontakt</a>
+    <div class="nav-inner">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#spielplan" onclick="closeMenu()">Spielplan</a>
+            <a href="#trainer" onclick="closeMenu()">Trainer</a>
+            <a href="#kontakt" onclick="closeMenu()">Kontakt</a>
+        </div>
+    </div>
 </nav>
 
-<!-- SPIELPLAN -->
 <section id="spielplan">
-<h2>Spielplan</h2>
+    <h2>Spielplan</h2>
 
-<div class="widget-box">
-<div id="fp-widget_root-3B5NwsAFG6saCNyjjmhUOaCHmC2">
-<a href="https://www.fupa.net/club/ksv-mesopotamia-grevenbroich" target="_blank">
-KSV Mesopotamia Grevenbroich auf FuPa
-</a>
-</div>
-</div>
-
+    <div class="widget-box">
+        <div id="fp-widget_root-3B5NwsAFG6saCNyjjmhUOaCHmC2">
+            <a href="https://www.fupa.net/club/ksv-mesopotamia-grevenbroich" target="_blank" rel="noopener">
+                KSV Mesopotamia Grevenbroich auf FuPa
+            </a>
+        </div>
+    </div>
 </section>
 
-<!-- TRAINER -->
 <section id="trainer">
-<h2>Trainerteam</h2>
+    <h2>Trainerteam</h2>
 
-<div class="team">
+    <div class="team">
+        <div class="spieler">
+            <img src="baykal.jpeg" alt="Baykal Günes">
+            <div class="spieler-info">Baykal Günes<br>Trainer</div>
+        </div>
 
-<div class="spieler">
-<img src="baykal.jpeg">
-<div class="spieler-info">Baykal Günes<br>Trainer</div>
-</div>
-
-<div class="spieler">
-<img src="goekhan.jpeg">
-<div class="spieler-info">Gökhan Bayrak<br>Co-Trainer</div>
-</div>
-
-</div>
+        <div class="spieler">
+            <img src="goekhan.jpeg" alt="Gökhan Bayrak">
+            <div class="spieler-info">Gökhan Bayrak<br>Co-Trainer</div>
+        </div>
+    </div>
 </section>
 
-<!-- KONTAKT -->
 <section id="kontakt">
-<h2>Kontakt</h2>
+    <h2>Kontakt</h2>
 
-<p><strong>E-Mail:</strong> mesopotamiagv@gmail.de</p>
-<p><strong>Instagram:</strong> @ksvmesopotamia</p>
+    <p><strong>E-Mail:</strong> mesopotamiagv@gmail.de</p>
+    <p><strong>Instagram:</strong> @ksvmesopotamia</p>
 
-<a class="button button-map" href="https://www.google.com/maps/search/?api=1&query=Grevenbroich" target="_blank">Google Maps</a>
-<a class="button button-insta" href="https://www.instagram.com/ksvmesopotamia?igsh=MXJiNmxkODg0dzZsYQ==" target="_blank">Instagram</a>
-
+    <a class="button button-map" href="https://www.google.com/maps/search/?api=1&query=Grevenbroich" target="_blank" rel="noopener noreferrer">Google Maps</a>
+    <a class="button button-insta" href="https://www.instagram.com/ksvmesopotamia?igsh=MXJiNmxkODg0dzZsYQ==" target="_blank" rel="noopener noreferrer">Instagram</a>
 </section>
 
 <footer>
-© 2026 KSV Mesopotamia Grevenbroich
+    © 2026 KSV Mesopotamia Grevenbroich
 </footer>
 
 <script src="https://widget-api.fupa.net/vendor/widget.js?v1"></script>
 
 <script>
 window.onload = function() {
-setTimeout(function(){
-document.getElementById("loader").classList.add("hidden");
-}, 1500);
+    setTimeout(function() {
+        document.getElementById("loader").classList.add("hidden");
+    }, 1500);
+};
+
+function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("active");
+}
+
+function closeMenu() {
+    if (window.innerWidth <= 768) {
+        document.getElementById("navLinks").classList.remove("active");
+    }
 }
 </script>
 
