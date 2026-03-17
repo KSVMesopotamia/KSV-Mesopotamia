@@ -1,992 +1,284 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>KSV Mesopotamia Grevenbroich | Fußballverein</title>
-<meta name="description" content="Offizielle Website von KSV Mesopotamia Grevenbroich. Spielplan, Trainerteam, Kontakt, Training und Vereinsinfos auf einen Blick.">
-<meta name="keywords" content="KSV Mesopotamia Grevenbroich, Fußballverein Grevenbroich, Amateurfußball, Verein NRW, Probetraining">
-<meta name="author" content="KSV Mesopotamia Grevenbroich">
-
-<style>
-:root {
-    --dark: #111827;
-    --dark2: #0f172a;
-    --green: #0f5f22;
-    --green-light: #198c37;
-    --red: #b71c1c;
-    --gold: #f2c400;
-    --bg: #edf2f7;
-    --white: #ffffff;
-    --muted: #64748b;
-    --shadow: 0 10px 25px rgba(0,0,0,0.12);
-    --radius: 16px;
-    --whatsapp: #25D366;
-}
-
-* {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: var(--bg);
-    color: #172033;
-    line-height: 1.6;
-}
-
-img {
-    max-width: 100%;
-    display: block;
-}
-
-.page-loader {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(135deg, #111827, #0f5f22, #b71c1c);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    transition: 0.8s;
-    text-align: center;
-    padding: 20px;
-}
-
-.page-loader.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loader-logo {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-    background: white;
-    border-radius: 50%;
-    padding: 8px;
-    margin-bottom: 16px;
-}
-
-.hero-header {
-    min-height: 92vh;
-    background: url("mannschaftsfoto.jpeg") center/cover no-repeat;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-header::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom right, rgba(17,24,39,0.82), rgba(15,95,34,0.48), rgba(183,28,28,0.32));
-}
-
-.hero-overlay {
-    position: relative;
-    z-index: 1;
-    min-height: 92vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 32px 20px;
-}
-
-.hero-content {
-    max-width: 950px;
-    text-align: center;
-    color: white;
-    animation: fadeUp 1s ease;
-}
-
-.logo {
-    width: 110px;
-    height: 110px;
-    object-fit: contain;
-    background: white;
-    border-radius: 50%;
-    padding: 8px;
-    margin: 0 auto 18px;
-    box-shadow: var(--shadow);
-}
-
-.hero-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 8px 14px;
-    border-radius: 999px;
-    margin-bottom: 18px;
-    font-weight: bold;
-    font-size: 14px;
-    backdrop-filter: blur(6px);
-}
-
-.hero-header h1 {
-    margin: 0;
-    font-size: 52px;
-    line-height: 1.1;
-}
-
-.hero-header p {
-    max-width: 760px;
-    margin: 18px auto 0;
-    font-size: 19px;
-}
-
-.hero-actions {
-    margin-top: 28px;
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.cta-btn {
-    display: inline-block;
-    padding: 14px 22px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.25s ease;
-    min-width: 190px;
-}
-
-.cta-primary {
-    background: var(--gold);
-    color: #111827;
-}
-
-.cta-primary:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.03);
-}
-
-.cta-secondary {
-    background: rgba(255,255,255,0.12);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.25);
-}
-
-.cta-secondary:hover {
-    transform: translateY(-2px);
-    background: rgba(255,255,255,0.18);
-}
-
-nav {
-    background: var(--dark);
-    position: sticky;
-    top: 0;
-    z-index: 2000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.16);
-}
-
-.nav-inner {
-    max-width: 1150px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    min-height: 62px;
-    padding: 0 14px;
-}
-
-.nav-brand {
-    position: absolute;
-    left: 14px;
-    color: white;
-    font-weight: bold;
-    font-size: 15px;
-    text-decoration: none;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.2s;
-}
-
-.nav-links a:hover {
-    color: var(--gold);
-}
-
-.menu-toggle {
-    display: none;
-    position: absolute;
-    right: 12px;
-    top: 11px;
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-}
-
-.container {
-    max-width: 1150px;
-    margin: 0 auto;
-    padding: 0 14px;
-}
-
-section {
-    margin: 22px auto;
-}
-
-.section-box {
-    background: white;
-    border-radius: var(--radius);
-    padding: 28px;
-    box-shadow: var(--shadow);
-}
-
-.section-title {
-    font-size: 30px;
-    margin-top: 0;
-    margin-bottom: 8px;
-    color: var(--dark);
-}
-
-.section-subtitle {
-    color: var(--muted);
-    margin-top: 0;
-    margin-bottom: 22px;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-}
-
-.stat-card {
-    background: linear-gradient(135deg, #0f172a, #16233d);
-    color: white;
-    padding: 22px;
-    border-radius: 14px;
-    text-align: center;
-}
-
-.stat-card strong {
-    display: block;
-    font-size: 28px;
-    color: var(--gold);
-    margin-bottom: 6px;
-}
-
-.player-banner {
-    background: linear-gradient(135deg, #b71c1c, #0f5f22);
-    color: white;
-    border-radius: var(--radius);
-    padding: 28px;
-    box-shadow: var(--shadow);
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 20px;
-    align-items: center;
-}
-
-.player-banner h2 {
-    margin: 0 0 10px 0;
-    font-size: 34px;
-}
-
-.player-banner p {
-    margin: 0;
-    font-size: 17px;
-}
-
-.player-banner .banner-actions {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.banner-btn {
-    display: inline-block;
-    padding: 14px 18px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.25s ease;
-}
-
-.banner-btn-primary {
-    background: white;
-    color: #111827;
-}
-
-.banner-btn-secondary {
-    background: rgba(255,255,255,0.12);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.25);
-}
-
-.banner-btn:hover {
-    transform: translateY(-2px);
-}
-
-.about-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 22px;
-    align-items: stretch;
-}
-
-.info-card {
-    background: #f8fafc;
-    border-radius: 14px;
-    padding: 22px;
-    border: 1px solid #e5e7eb;
-}
-
-.info-list {
-    margin: 0;
-    padding-left: 18px;
-}
-
-.info-list li {
-    margin-bottom: 10px;
-}
-
-.two-col-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
-}
-
-.highlight-card {
-    background: linear-gradient(135deg, rgba(15,95,34,0.08), rgba(183,28,28,0.08));
-    border: 1px solid rgba(0,0,0,0.06);
-    border-radius: 14px;
-    padding: 22px;
-}
-
-.highlight-card h3 {
-    margin-top: 0;
-}
-
-.widget-box {
-    background: #f8fafc;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #e5e7eb;
-}
-
-.spielplan-extra {
-    margin-top: 18px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-}
-
-.mini-card {
-    background: #0f172a;
-    color: white;
-    border-radius: 14px;
-    padding: 20px;
-}
-
-.mini-card h3 {
-    margin-top: 0;
-    color: var(--gold);
-}
-
-.team {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.spieler {
-    width: 260px;
-    background: var(--dark2);
-    color: white;
-    border-radius: 14px;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: 0.25s ease;
-}
-
-.spieler:hover {
-    transform: translateY(-5px);
-}
-
-.spieler img {
-    width: 100%;
-    height: 290px;
-    object-fit: cover;
-    display: block;
-}
-
-.spieler-info {
-    padding: 16px;
-}
-
-.spieler-name {
-    font-size: 19px;
-    font-weight: bold;
-    margin-bottom: 6px;
-}
-
-.spieler-role {
-    color: #cbd5e1;
-}
-
-.cta-section {
-    background: linear-gradient(135deg, #111827, #0f5f22);
-    color: white;
-    border-radius: var(--radius);
-    padding: 34px 28px;
-    box-shadow: var(--shadow);
-    text-align: center;
-}
-
-.cta-section h2 {
-    margin-top: 0;
-    font-size: 34px;
-}
-
-.cta-section p {
-    max-width: 700px;
-    margin: 0 auto 22px;
-}
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
-}
-
-.contact-card {
-    background: #f8fafc;
-    border-radius: 14px;
-    padding: 22px;
-    border: 1px solid #e5e7eb;
-}
-
-.contact-card h3 {
-    margin-top: 0;
-}
-
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.button {
-    display: block;
-    padding: 13px 16px;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 10px;
-    font-weight: bold;
-    transition: 0.25s ease;
-}
-
-.button:hover {
-    transform: translateY(-2px);
-}
-
-.button-map {
-    background: var(--green);
-}
-
-.button-insta {
-    background: var(--red);
-}
-
-.button-mail {
-    background: var(--dark);
-}
-
-.button-whatsapp {
-    background: var(--whatsapp);
-}
-
-.floating-whatsapp {
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    width: 62px;
-    height: 62px;
-    border-radius: 50%;
-    background: var(--whatsapp);
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-    z-index: 3000;
-    transition: 0.25s ease;
-}
-
-.floating-whatsapp:hover {
-    transform: scale(1.06);
-}
-
-footer {
-    background: var(--dark);
-    color: white;
-    text-align: center;
-    padding: 28px 18px;
-    margin-top: 28px;
-}
-
-.footer-small {
-    color: #cbd5e1;
-    font-size: 14px;
-    margin-top: 6px;
-}
-
-.fade-in {
-    animation: fadeUp 0.8s ease;
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(22px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (max-width: 900px) {
-    .about-grid,
-    .two-col-grid,
-    .contact-grid,
-    .spielplan-extra,
-    .stats-grid,
-    .player-banner {
-        grid-template-columns: 1fr;
-    }
-
-    .player-banner .banner-actions {
-        justify-content: flex-start;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-header,
-    .hero-overlay {
-        min-height: 78vh;
-    }
-
-    .logo {
-        width: 82px;
-        height: 82px;
-    }
-
-    .hero-header h1 {
-        font-size: 32px;
-    }
-
-    .hero-header p {
-        font-size: 16px;
-    }
-
-    .nav-inner {
-        display: block;
-        min-height: auto;
-    }
-
-    .nav-brand {
-        position: static;
-        display: block;
-        padding: 18px 16px 12px 16px;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0;
-        padding: 0 16px 14px 16px;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links a {
-        width: 100%;
-        padding: 12px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .section-box,
-    .cta-section,
-    .player-banner {
-        padding: 20px 16px;
-    }
-
-    .section-title {
-        font-size: 26px;
-    }
-
-    .cta-section h2,
-    .player-banner h2 {
-        font-size: 28px;
-    }
-
-    .spieler {
-        width: 100%;
-        max-width: 340px;
-    }
-
-    .spieler img {
-        height: 240px;
-    }
-
-    .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .cta-btn {
-        min-width: 100%;
-    }
-
-    .floating-whatsapp {
-        width: 58px;
-        height: 58px;
-        right: 14px;
-        bottom: 14px;
-        font-size: 28px;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<div class="page-loader" id="loader">
-    <img src="logo.png" alt="Vereinslogo" class="loader-logo">
-    <h2 style="color:white; margin:0 0 8px 0;">KSV Mesopotamia Grevenbroich</h2>
-    <p style="color:white; margin:0;">Ein Team. Ein Verein. Eine Leidenschaft.</p>
-</div>
-
-<header class="hero-header">
-    <div class="hero-overlay">
-        <div class="hero-content">
-            <div class="hero-badge">Offizielle Vereinsseite</div>
-            <img src="logo.png" class="logo" alt="Vereinslogo">
-            <h1>KSV Mesopotamia Grevenbroich</h1>
-            <p>
-                Leidenschaft, Zusammenhalt und Fußball aus Grevenbroich.
-                Willkommen auf der offiziellen Website unseres Vereins.
-            </p>
-
-            <div class="hero-actions">
-                <a href="https://wa.me/4917640467319?text=Hallo%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Probetraining%20bei%20KSV%20Mesopotamia" class="cta-btn cta-primary" target="_blank" rel="noopener noreferrer">Jetzt Probetraining anfragen</a>
-                <a href="#spielplan" class="cta-btn cta-secondary">Zum Spielplan</a>
+<section id="kader" class="fade-in">
+    <div class="section-box">
+        <h2 class="section-title">Kader</h2>
+        <p class="section-subtitle">
+            Unser aktueller Kader mit 34 Spielern.
+        </p>
+
+        <div class="kader-grid">
+
+            <div class="kader-card">
+                <img src="spieler1.jpg" alt="Spieler 1">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 1</div>
+                    <div class="kader-role">Position</div>
+                </div>
             </div>
+
+            <div class="kader-card">
+                <img src="spieler2.jpg" alt="Spieler 2">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 2</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler3.jpg" alt="Spieler 3">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 3</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler4.jpg" alt="Spieler 4">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 4</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler5.jpg" alt="Spieler 5">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 5</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler6.jpg" alt="Spieler 6">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 6</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler7.jpg" alt="Spieler 7">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 7</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler8.jpg" alt="Spieler 8">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 8</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler9.jpg" alt="Spieler 9">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 9</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler10.jpg" alt="Spieler 10">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 10</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler11.jpg" alt="Spieler 11">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 11</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler12.jpg" alt="Spieler 12">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 12</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler13.jpg" alt="Spieler 13">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 13</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler14.jpg" alt="Spieler 14">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 14</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler15.jpg" alt="Spieler 15">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 15</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler16.jpg" alt="Spieler 16">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 16</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler17.jpg" alt="Spieler 17">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 17</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler18.jpg" alt="Spieler 18">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 18</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler19.jpg" alt="Spieler 19">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 19</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler20.jpg" alt="Spieler 20">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 20</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler21.jpg" alt="Spieler 21">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 21</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler22.jpg" alt="Spieler 22">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 22</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler23.jpg" alt="Spieler 23">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 23</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler24.jpg" alt="Spieler 24">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 24</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler25.jpg" alt="Spieler 25">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 25</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler26.jpg" alt="Spieler 26">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 26</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler27.jpg" alt="Spieler 27">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 27</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler28.jpg" alt="Spieler 28">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 28</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler29.jpg" alt="Spieler 29">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 29</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler30.jpg" alt="Spieler 30">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 30</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler31.jpg" alt="Spieler 31">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 31</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler32.jpg" alt="Spieler 32">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 32</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler33.jpg" alt="Spieler 33">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 33</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
+            <div class="kader-card">
+                <img src="spieler34.jpg" alt="Spieler 34">
+                <div class="kader-info">
+                    <div class="kader-name">Spieler 34</div>
+                    <div class="kader-role">Position</div>
+                </div>
+            </div>
+
         </div>
     </div>
-</header>
-
-<nav>
-    <div class="nav-inner">
-        <a href="#" class="nav-brand">KSV Mesopotamia</a>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-        <div class="nav-links" id="navLinks">
-            <a href="#ueber-uns" onclick="closeMenu()">Über uns</a>
-            <a href="#spielplan" onclick="closeMenu()">Spielplan</a>
-            <a href="#trainer" onclick="closeMenu()">Trainerteam</a>
-            <a href="#training" onclick="closeMenu()">Training</a>
-            <a href="#spielstaette" onclick="closeMenu()">Spielstätte</a>
-            <a href="#mitmachen" onclick="closeMenu()">Mitmachen</a>
-            <a href="#kontakt" onclick="closeMenu()">Kontakt</a>
-        </div>
-    </div>
-</nav>
-
-<main class="container">
-
-    <section class="fade-in">
-        <div class="section-box">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <strong>1</strong>
-                    <span>Verein</span>
-                </div>
-                <div class="stat-card">
-                    <strong>100%</strong>
-                    <span>Leidenschaft</span>
-                </div>
-                <div class="stat-card">
-                    <strong>2</strong>
-                    <span>Trainer</span>
-                </div>
-                <div class="stat-card">
-                    <strong>34</strong>
-                    <span>Spieler</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="fade-in">
-        <div class="player-banner">
-            <div>
-                <h2>Wir suchen neue Spieler</h2>
-                <p>
-                    Du hast Bock auf Fußball, Teamgeist und eine starke Mannschaft?
-                    Dann melde dich direkt bei uns und vereinbare dein Probetraining.
-                </p>
-            </div>
-            <div class="banner-actions">
-                <a class="banner-btn banner-btn-primary" href="https://wa.me/4917640467319?text=Hallo%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Probetraining%20bei%20KSV%20Mesopotamia" target="_blank" rel="noopener noreferrer">Per WhatsApp melden</a>
-                <a class="banner-btn banner-btn-secondary" href="mailto:mesopotamiagv@gmail.com?subject=Probetraining%20KSV%20Mesopotamia">Per E-Mail melden</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="ueber-uns" class="fade-in">
-        <div class="section-box">
-            <h2 class="section-title">Über uns</h2>
-            <p class="section-subtitle">
-                KSV Mesopotamia Grevenbroich steht für Zusammenhalt, Einsatz und die Liebe zum Fußball.
-            </p>
-
-            <div class="about-grid">
-                <div class="info-card">
-                    <h3>Unser Verein</h3>
-                    <p>
-                        Wir sind ein ambitionierter Fußballverein aus Grevenbroich mit einer klaren Identität:
-                        Teamgeist, Disziplin und Leidenschaft auf und neben dem Platz.
-                    </p>
-                    <p>
-                        Bei uns stehen Gemeinschaft, sportliche Entwicklung und Respekt im Mittelpunkt.
-                        Egal ob Spieler, Trainer, Unterstützer oder Fans – wir ziehen gemeinsam an einem Strang.
-                    </p>
-                </div>
-
-                <div class="info-card">
-                    <h3>Wofür wir stehen</h3>
-                    <ul class="info-list">
-                        <li>Leidenschaftlicher Amateurfußball</li>
-                        <li>Starker Zusammenhalt im Team</li>
-                        <li>Klare sportliche Ziele</li>
-                        <li>Respekt, Fairness und Disziplin</li>
-                        <li>Offen für neue Spieler und Unterstützer</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="spielplan" class="fade-in">
-        <div class="section-box">
-            <h2 class="section-title">Spielplan</h2>
-            <p class="section-subtitle">
-                Hier findest du unseren aktuellen Auftritt auf FuPa sowie zusätzliche Vereinsinfos.
-            </p>
-
-            <div class="widget-box">
-                <div id="fp-widget_root-3B5NwsAFG6saCNyjjmhUOaCHmC2">
-                    <a href="https://www.fupa.net/club/ksv-mesopotamia-grevenbroich" target="_blank" rel="noopener">
-                        KSV Mesopotamia Grevenbroich auf FuPa ansehen
-                    </a>
-                </div>
-            </div>
-
-            <div class="spielplan-extra">
-                <div class="mini-card">
-                    <h3>Nächstes Ziel</h3>
-                    <p>
-                        Verfolge unsere Spiele, Ergebnisse und Tabellenstände direkt über FuPa
-                        und bleib immer auf dem neuesten Stand.
-                    </p>
-                </div>
-
-                <div class="mini-card">
-                    <h3>Für Fans & Spieler</h3>
-                    <p>
-                        Du willst uns unterstützen oder Teil des Teams werden?
-                        Dann nutze direkt den Bereich <strong>Mitmachen</strong> weiter unten.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="trainer" class="fade-in">
-        <div class="section-box">
-            <h2 class="section-title">Trainerteam</h2>
-            <p class="section-subtitle">
-                Das Trainerteam von KSV Mesopotamia Grevenbroich.
-            </p>
-
-            <div class="team">
-                <div class="spieler">
-                    <img src="baykal.jpeg" alt="Baykal Günes">
-                    <div class="spieler-info">
-                        <div class="spieler-name">Baykal Günes</div>
-                        <div class="spieler-role">Trainer</div>
-                    </div>
-                </div>
-
-                <div class="spieler">
-                    <img src="goekhan.jpeg" alt="Gökhan Bayrak">
-                    <div class="spieler-info">
-                        <div class="spieler-name">Gökhan Bayrak</div>
-                        <div class="spieler-role">Co-Trainer</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="training" class="fade-in">
-        <div class="section-box">
-            <h2 class="section-title">Training</h2>
-            <p class="section-subtitle">
-                Hier kannst du eure Trainingszeiten und Zusatzinfos eintragen.
-            </p>
-
-            <div class="two-col-grid">
-                <div class="highlight-card">
-                    <h3>Trainingszeiten</h3>
-                    <p><strong>Dienstag:</strong> 19:00 – 20:30 Uhr</p>
-                    <p><strong>Donnerstag:</strong> 19:00 – 20:30 Uhr</p>
-                    <p><strong>Treffpunkt:</strong> 30 Minuten vor Trainingsbeginn</p>
-                </div>
-
-                <div class="highlight-card">
-                    <h3>Wichtige Hinweise</h3>
-                    <p>Bitte pünktlich erscheinen und geeignete Trainingskleidung mitbringen.</p>
-                    <p>Neue Spieler sind nach vorheriger Kontaktaufnahme herzlich willkommen.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="spielstaette" class="fade-in">
-        <div class="section-box">
-            <h2 class="section-title">Spielstätte</h2>
-            <p class="section-subtitle">
-                Hier findest du unsere Platz- und Standortinformationen.
-            </p>
-
-            <div class="two-col-grid">
-                <div class="highlight-card">
-                    <h3>Adresse</h3>
-                    <p><strong>Sportanlage:</strong> KSV Mesopotamia Grevenbroich</p>
-                    <p><strong>Adresse:</strong> Hauptstraße 130</p>
-                    <p><strong>Ort:</strong> 41517 Grevenbroich</p>
-                </div>
-
-                <div class="highlight-card">
-                    <h3>Anfahrt & Hinweise</h3>
-                    <p>Unsere Spielstätte befindet sich in Grevenbroich und ist für Spieler, Fans und Gäste gut erreichbar.</p>
-                    <p>Bitte bei Heimspielen ausreichend Zeit für Anfahrt und Parkplatzsuche einplanen.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="mitmachen" class="fade-in">
-        <div class="cta-section">
-            <h2>Werde Teil unseres Teams</h2>
-            <p>
-                Du suchst einen Verein mit Teamgeist, Ehrgeiz und Leidenschaft?
-                Dann melde dich bei uns und vereinbare ein Probetraining.
-            </p>
-
-            <div class="hero-actions">
-                <a href="https://wa.me/4917640467319?text=Hallo%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Probetraining%20bei%20KSV%20Mesopotamia" class="cta-btn cta-primary" target="_blank" rel="noopener noreferrer">Per WhatsApp anfragen</a>
-                <a href="mailto:mesopotamiagv@gmail.com?subject=Probetraining%20KSV%20Mesopotamia" class="cta-btn cta-secondary">Per E-Mail anfragen</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="kontakt" class="fade-in">
-        <div class="section-box">
-            <h2 class="section-title">Kontakt</h2>
-            <p class="section-subtitle">
-                Nimm direkt Kontakt mit uns auf.
-            </p>
-
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <h3>Kontaktinformationen</h3>
-                    <p><strong>E-Mail:</strong><br> mesopotamiagv@gmail.com</p>
-                    <p><strong>Instagram:</strong><br> @ksvmesopotamia</p>
-                    <p><strong>WhatsApp:</strong><br> 0176 40467319</p>
-                    <p><strong>Adresse:</strong><br> Hauptstraße 130, 41517 Grevenbroich</p>
-                </div>
-
-                <div class="contact-card">
-                    <h3>Direkte Links</h3>
-                    <div class="button-group">
-                        <a class="button button-whatsapp" href="https://wa.me/4917640467319?text=Hallo%20ich%20interessiere%20mich%20f%C3%BCr%20KSV%20Mesopotamia" target="_blank" rel="noopener noreferrer">WhatsApp schreiben</a>
-                        <a class="button button-mail" href="mailto:mesopotamiagv@gmail.com">E-Mail senden</a>
-                        <a class="button button-map" href="https://www.google.com/maps/search/?api=1&query=Hauptstra%C3%9Fe+130+41517+Grevenbroich" target="_blank" rel="noopener noreferrer">Google Maps öffnen</a>
-                        <a class="button button-insta" href="https://www.instagram.com/ksvmesopotamia?igsh=MXJiNmxkODg0dzZsYQ==" target="_blank" rel="noopener noreferrer">Instagram öffnen</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-</main>
-
-<footer>
-    <div>© 2026 KSV Mesopotamia Grevenbroich</div>
-    <div class="footer-small">Ein Team. Ein Verein. Eine Leidenschaft.</div>
-</footer>
-
-<a class="floating-whatsapp" href="https://wa.me/4917640467319?text=Hallo%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Probetraining%20bei%20KSV%20Mesopotamia" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp schreiben">
-    ✆
-</a>
-
-<script src="https://widget-api.fupa.net/vendor/widget.js?v1"></script>
-
-<script>
-window.onload = function() {
-    setTimeout(function() {
-        document.getElementById("loader").classList.add("hidden");
-    }, 1300);
-};
-
-function toggleMenu() {
-    document.getElementById("navLinks").classList.toggle("active");
-}
-
-function closeMenu() {
-    if (window.innerWidth <= 768) {
-        document.getElementById("navLinks").classList.remove("active");
-    }
-}
-</script>
-
-</body>
-</html>
+</section>
